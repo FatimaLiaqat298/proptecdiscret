@@ -8,4 +8,4 @@ cmds = ["npm ci --legacy-peer-deps"]
 cmds = ["CI=false npm run build"]
 
 [start]
-cmd = "npx --yes serve -s build -l 80"
+cmd = "npx --yes serve -s build -l 3000"
