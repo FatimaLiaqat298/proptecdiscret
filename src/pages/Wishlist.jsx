@@ -11,7 +11,7 @@ const WishlistPage = () => {
     return (
         <div className="wishlist-page">
             <Navbar />
-            <section className="container" style={{ paddingTop: '140px', minHeight: '80vh' }}>
+            <section className="container" style={{ paddingTop: '140px', paddingBottom: '100px', minHeight: '80vh' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '40px' }}>
                     <Heart size={32} className="heart-icon" fill="var(--primary-color)" color="var(--primary-color)" />
                     <h1 className="h1">My Wishlist</h1>

@@ -27,7 +27,12 @@ const PropertyCard = ({ item, isShowcase, darkTheme }) => {
             className={`property-card ${darkTheme ? 'dark-theme' : ''}`}
             style={{
                 position: 'relative',
-                background: darkTheme ? '#1e1e1e' : '#fff'
+                background: darkTheme ? 'rgba(30, 30, 30, 0.7)' : 'rgba(255, 255, 255, 0.7)',
+                backdropFilter: 'blur(16px) saturate(140%)',
+                WebkitBackdropFilter: 'blur(16px) saturate(140%)',
+                border: darkTheme ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.05)',
+                borderRadius: '24px',
+                overflow: 'hidden'
             }}
         >
             {/* Wishlist heart button */}
@@ -48,8 +53,8 @@ const PropertyCard = ({ item, isShowcase, darkTheme }) => {
             >
                 <Heart
                     size={18}
-                    fill={active ? "#ff4d4d" : "none"}
-                    color={active ? "#ff4d4d" : darkTheme ? "#fff" : "#64748b"}
+                    fill={active ? "#b61113" : "none"}
+                    color={active ? "#b61113" : darkTheme ? "#fff" : "#100F0F"}
                 />
             </button>
 
@@ -132,7 +137,7 @@ const PropertyCard = ({ item, isShowcase, darkTheme }) => {
                     {/* Price */}
                     <div
                         className="property-price"
-                        style={{ color: darkTheme ? '#CFCFCF' : 'var(--primary-color)', marginTop: 'auto' }}
+                        style={{ color: '#b61113', marginTop: 'auto', fontWeight: 800, fontSize: '1.2rem' }}
                     >
                         {item.price}
                     </div>
@@ -141,7 +146,7 @@ const PropertyCard = ({ item, isShowcase, darkTheme }) => {
                     {isShowcase && (
                         <div style={{ marginTop: '20px' }}>
                             <motion.span
-                                whileHover={{ scale: 1.05, background: darkTheme ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)' }}
+                                whileHover={{ scale: 1.05, background: '#b61113', color: '#fff' }}
                                 whileTap={{ scale: 0.95 }}
                                 style={{
                                     display: 'block',
@@ -149,10 +154,10 @@ const PropertyCard = ({ item, isShowcase, darkTheme }) => {
                                     width: '100%',
                                     padding: '12px 0',
                                     borderRadius: '100px',
-                                    border: `1.5px solid ${darkTheme ? 'rgba(255,255,255,0.25)' : '#e2e8f0'}`,
+                                    border: `1.5px solid #b61113`,
                                     background: 'transparent',
-                                    color: darkTheme ? '#fff' : '#374151',
-                                    fontWeight: 600,
+                                    color: '#b61113',
+                                    fontWeight: 700,
                                     fontSize: '0.95rem',
                                     transition: 'all 0.3s ease',
                                 }}

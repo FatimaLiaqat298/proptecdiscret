@@ -4,12 +4,12 @@ const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
     const [wishlist, setWishlist] = useState(() => {
-        const saved = localStorage.getItem('discret_wishlist');
+        const saved = sessionStorage.getItem('discret_wishlist');
         return saved ? JSON.parse(saved) : [];
     });
 
     useEffect(() => {
-        localStorage.setItem('discret_wishlist', JSON.stringify(wishlist));
+        sessionStorage.setItem('discret_wishlist', JSON.stringify(wishlist));
     }, [wishlist]);
 
     const addToWishlist = (item) => {

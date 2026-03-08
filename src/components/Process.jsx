@@ -88,13 +88,7 @@ const Process = () => (
             </motion.div>
 
             {/* Steps Row */}
-            <div style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 0,
-                overflowX: 'auto',
-                paddingBottom: 8
-            }}>
+            <div className="process-steps-container">
                 {STEPS.map((step, i) => {
                     const Icon = step.icon;
                     return (
@@ -103,10 +97,10 @@ const Process = () => (
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.3, duration: 0.5 }}
+                                transition={{ delay: i * 0.15, duration: 0.5 }}
                                 whileHover={{ y: -8, boxShadow: '0 20px 50px rgba(0,0,0,0.1)' }}
+                                className="process-step-card"
                                 style={{
-                                    flex: '1 1 220px',
                                     background: '#fff',
                                     border: '1px solid #e2e8f0',
                                     borderRadius: 24,
@@ -119,13 +113,7 @@ const Process = () => (
                                 }}
                             >
                                 {/* Large step number — watermark */}
-                                <div style={{
-                                    position: 'absolute', top: 16, right: 20,
-                                    fontSize: '4.5rem', fontWeight: 900,
-                                    color: '#000', opacity: 0.15,
-                                    lineHeight: 1, userSelect: 'none',
-                                    fontVariantNumeric: 'tabular-nums'
-                                }}>
+                                <div className="step-watermark">
                                     {step.num}
                                 </div>
 
@@ -136,37 +124,20 @@ const Process = () => (
                                 }} />
 
                                 {/* Icon circle */}
-                                <div style={{
-                                    width: 52, height: 52, borderRadius: '50%',
-                                    background: step.iconBg,
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    marginBottom: 22
-                                }}>
+                                <div className="step-icon-circle" style={{ background: step.iconBg }}>
                                     <Icon size={24} color={step.iconColor} strokeWidth={2} />
                                 </div>
 
                                 {/* Step number pill */}
-                                <span style={{
-                                    display: 'inline-block', padding: '2px 10px',
-                                    borderRadius: 100, fontSize: '0.72rem',
-                                    fontWeight: 700, letterSpacing: '0.08em',
-                                    background: step.iconBg, color: step.accent,
-                                    marginBottom: 12
-                                }}>
+                                <span className="step-pill" style={{ background: step.iconBg, color: step.accent }}>
                                     STEP {step.num}
                                 </span>
 
-                                <h4 style={{
-                                    fontWeight: 800, fontSize: '1.2rem',
-                                    color: '#0f172a', marginBottom: 12
-                                }}>
+                                <h4 className="step-title">
                                     {step.title}
                                 </h4>
 
-                                <p style={{
-                                    color: '#475569', fontSize: '0.92rem',
-                                    lineHeight: 1.7, fontWeight: 500
-                                }}>
+                                <p className="step-desc">
                                     {step.desc}
                                 </p>
                             </motion.div>
@@ -177,8 +148,8 @@ const Process = () => (
                                     initial={{ opacity: 0, scale: 0.5, x: -10 }}
                                     whileInView={{ opacity: 1, scale: 1, x: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ delay: i * 0.3 + 0.2, duration: 0.4 }}
-                                    style={{ padding: '0 8px', paddingTop: 60 }}
+                                    transition={{ delay: i * 0.15 + 0.1, duration: 0.4 }}
+                                    className="step-arrow-container"
                                 >
                                     <Arrow />
                                 </motion.div>

@@ -237,30 +237,17 @@ const LocationDiscovery = () => {
             <div className="container">
 
                 {/* ── Layout splits when a city is selected ── */}
-                <div style={{
-                    display: 'flex',
-                    gap: 60,
-                    alignItems: 'flex-start',
-                    transition: 'all 0.5s ease',
-                    flexWrap: 'wrap'
-                }}>
+                <div className={`locations-container ${selected ? 'city-selected' : ''}`}>
 
                     {/* LEFT — always visible, shrinks when city is selected */}
-                    <motion.div
-                        layout
-                        style={{
-                            flex: selected ? '0 0 220px' : '1 1 100%',
-                            transition: 'flex 0.5s ease',
-                            minWidth: selected ? 220 : 'unset',
-                            marginBottom: selected ? 0 : 40
-                        }}
-                    >
+                    <div className="locations-sidebar">
                         {/* Heading */}
                         <AnimatePresence mode="wait">
                             {!selected ? (
                                 <motion.div
                                     key="full-header"
                                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                                    className="locations-intro"
                                 >
                                     <h2 className="h2" style={{ color: '#f8fafc' }}>
                                         Cities Where Smart Real Estate Moves Faster
@@ -268,12 +255,7 @@ const LocationDiscovery = () => {
                                     <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: 12, fontSize: '1.05rem' }}>
                                         Explore high-potential locations with better access, stronger demand, and future growth.
                                     </p>
-                                    <div style={{
-                                        width: 48, height: 3,
-                                        background: 'linear-gradient(90deg, #100F0F, #CFCFCF)',
-                                        borderRadius: 2,
-                                        marginBottom: 24
-                                    }} />
+                                    <div className="divider-line" />
                                 </motion.div>
                             ) : (
                                 <motion.div
@@ -291,39 +273,16 @@ const LocationDiscovery = () => {
                         </AnimatePresence>
 
                         {/* City Pills */}
-                        <div style={{
-                            display: 'flex',
-                            gap: 12,
-                            flexWrap: selected ? 'nowrap' : 'wrap',
-                            flexDirection: selected ? 'column' : 'row',
-                            justifyContent: selected ? 'flex-start' : 'center',
-                            marginTop: selected ? 0 : 32,
-                            marginBottom: selected ? 0 : 60
-                        }}>
+                        <div className={`city-pills ${selected ? 'vertical' : 'horizontal'}`}>
                             {CITIES.map(city => {
                                 const isActive = selected === city;
                                 return (
                                     <motion.button
                                         key={city}
-                                        layout
                                         whileHover={{ scale: 1.04 }}
                                         whileTap={{ scale: 0.97 }}
                                         onClick={() => setSelected(isActive ? null : city)}
-                                        style={{
-                                            padding: selected ? '10px 18px' : '14px 30px',
-                                            borderRadius: 100,
-                                            border: isActive ? '1.5px solid #F9F9F9' : '1px solid rgba(255,255,255,0.15)',
-                                            background: isActive ? '#f9f9f9' : 'rgba(255,255,255,0.12)',
-                                            color: isActive ? '#000' : 'rgba(255,255,255,0.85)',
-                                            fontWeight: isActive ? 700 : 500,
-                                            fontSize: selected ? '0.85rem' : '1rem',
-                                            cursor: 'pointer',
-                                            transition: 'all 0.3s ease',
-                                            backdropFilter: 'blur(6px)',
-                                            textAlign: 'left',
-                                            boxShadow: isActive ? '0 4px 20px rgba(255,255,255,0.2)' : 'none',
-                                            display: 'flex', alignItems: 'center', gap: 6
-                                        }}
+                                        className={`city-pill ${isActive ? 'active' : ''}`}
                                     >
                                         {isActive && <ChevronRight size={14} />}
                                         {city}
@@ -338,62 +297,47 @@ const LocationDiscovery = () => {
                                 initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                                 style={{ textAlign: 'center', marginTop: 16 }}
                             >
-                                <Link to="/search"
-                                    style={{
-                                        display: 'inline-block', padding: '14px 36px', borderRadius: 100,
-                                        border: '1.5px solid rgba(255,255,255,0.25)', color: '#fff',
-                                        fontWeight: 600, textDecoration: 'none', fontSize: '0.95rem',
-                                        transition: 'all 0.3s', backdropFilter: 'blur(6px)',
-                                        background: 'rgba(255,255,255,0.06)'
-                                    }}
-                                >
+                                <Link to="/search" className="explore-loc-btn">
                                     Explore Locations
                                 </Link>
                             </motion.div>
                         )}
-                    </motion.div>
+                    </div>
 
                     {/* RIGHT — City listings, slides in from the right */}
                     <AnimatePresence mode="wait">
                         {selected && (
                             <motion.div
                                 key={selected}
-                                initial={{ opacity: 0, x: 60 }}
+                                initial={{ opacity: 0, x: 30 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 40 }}
-                                transition={{ type: 'spring', damping: 20, stiffness: 120 }}
-                                style={{ flex: '1 1 0', minWidth: 0 }}
+                                exit={{ opacity: 0, x: 20 }}
+                                transition={{ duration: 0.4 }}
+                                className="locations-results"
                             >
                                 {/* Count + View All */}
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-                                    <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
-                                        <strong style={{ color: '#fff', fontWeight: 800, fontSize: '1.1rem' }}>{listings.length}</strong> &nbsp;properties in{' '}
-                                        <strong style={{ color: '#fff' }}>{selected}</strong>
+                                <div className="results-header">
+                                    <p>
+                                        <strong className="count">{listings.length}</strong> &nbsp;properties in{' '}
+                                        <strong className="city-name">{selected}</strong>
                                     </p>
                                     <Link
                                         to={`/search?location=${encodeURIComponent(selected)}`}
-                                        style={{
-                                            color: '#CFCFCF', fontWeight: 700, fontSize: '0.875rem',
-                                            textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4
-                                        }}
+                                        className="view-all-link"
                                     >
                                         View All <ChevronRight size={16} />
                                     </Link>
                                 </div>
 
                                 {/* Cards grid */}
-                                <div style={{
-                                    display: 'grid',
-                                    gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                                    gap: 20
-                                }}>
+                                <div className="small-cards-grid">
                                     <AnimatePresence>
                                         {shown.map((item, i) => (
                                             <motion.div
                                                 key={item.id}
-                                                initial={{ opacity: 0, y: 20 }}
+                                                initial={{ opacity: 0, y: 15 }}
                                                 animate={{ opacity: 1, y: 0 }}
-                                                transition={{ delay: i * 0.08 }}
+                                                transition={{ delay: i * 0.05 }}
                                             >
                                                 <SmallCard item={item} />
                                             </motion.div>
@@ -405,18 +349,12 @@ const LocationDiscovery = () => {
                                 {hasMore && (
                                     <motion.div
                                         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                                        transition={{ delay: 0.25 }}
+                                        transition={{ delay: 0.2 }}
                                         style={{ marginTop: 24 }}
                                     >
                                         <Link
                                             to={`/search?location=${encodeURIComponent(selected)}`}
-                                            style={{
-                                                display: 'inline-flex', alignItems: 'center', gap: 8,
-                                                padding: '12px 28px', borderRadius: 100,
-                                                background: '#f9f9f9', color: '#000',
-                                                fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem',
-                                                boxShadow: '0 4px 20px rgba(255,255,255,0.2)'
-                                            }}
+                                            className="has-more-btn"
                                         >
                                             View all {listings.length} properties in {selected} <ChevronRight size={16} />
                                         </Link>
@@ -429,6 +367,7 @@ const LocationDiscovery = () => {
                 </div>
             </div>
         </section>
+
     );
 };
 

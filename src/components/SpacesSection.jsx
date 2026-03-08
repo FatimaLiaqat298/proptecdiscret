@@ -37,7 +37,8 @@ const ShowcaseRow = ({ item, index }) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            style={{ flex: '0 0 48%', borderRadius: 24, overflow: 'hidden', maxHeight: 380 }}
+            className="showcase-image-block"
+            style={{ borderRadius: 24, overflow: 'hidden' }}
         >
             <img
                 src={img}
@@ -59,58 +60,27 @@ const ShowcaseRow = ({ item, index }) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+            className={`showcase-text-block ${imageLeft ? 'pad-left' : 'pad-right'}`}
             style={{
-                flex: '0 0 44%',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                padding: imageLeft ? '0 0 0 20px' : '0 20px 0 0'
             }}
         >
             {/* Blue accent line */}
-            <div style={{
-                width: 48, height: 3,
-                background: 'linear-gradient(90deg, #100F0F, #CFCFCF)',
-                borderRadius: 2,
-                marginBottom: 24
-            }} />
+            <div className="accent-line" />
 
-            <h3 style={{
-                fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
-                fontWeight: 300,
-                color: '#f8fafc',
-                lineHeight: 1.2,
-                marginBottom: 20,
-                letterSpacing: '-0.02em',
-                fontFamily: 'Georgia, "Times New Roman", serif'
-            }}>
+            <h3 className="showcase-title">
                 {title}
             </h3>
 
-            <p style={{
-                color: '#94a3b8',
-                fontSize: '1.05rem',
-                lineHeight: 1.75,
-                marginBottom: 28,
-                maxWidth: 420
-            }}>
+            <p className="showcase-desc">
                 {desc}
             </p>
 
             <Link
                 to={`/property/${id}`}
-                style={{
-                    color: '#CFCFCF',
-                    fontWeight: 600,
-                    fontSize: '1rem',
-                    textDecoration: 'none',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 6,
-                    transition: 'gap 0.2s ease'
-                }}
-                onMouseEnter={e => e.currentTarget.style.gap = '12px'}
-                onMouseLeave={e => e.currentTarget.style.gap = '6px'}
+                className="showcase-link"
             >
                 See Property Details →
             </Link>
@@ -118,14 +88,13 @@ const ShowcaseRow = ({ item, index }) => {
     );
 
     return (
-        <div style={{
+        <div className={`showcase-row ${imageLeft ? 'img-left' : 'img-right'}`} style={{
             display: 'flex',
             alignItems: 'center',
             gap: 60,
             justifyContent: 'space-between',
             padding: '60px 0',
             borderBottom: index < SHOWCASE_ITEMS.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-            flexWrap: 'wrap'
         }}>
             {imageLeft ? imageBlock : textBlock}
             {imageLeft ? textBlock : imageBlock}

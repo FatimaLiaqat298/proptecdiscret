@@ -27,10 +27,11 @@ const Footer = () => (
                         className="btn footer-cta-btn"
                         style={{
                             marginTop: '16px',
-                            backgroundColor: '#fff',
-                            color: 'var(--primary-color)',
-                            boxShadow: '0 10px 30px rgba(255,255,255,0.1)',
-                            width: 'fit-content'
+                            backgroundColor: '#b61113',
+                            color: '#fff',
+                            boxShadow: '0 10px 30px rgba(182,17,19,0.2)',
+                            width: 'fit-content',
+                            border: 'none'
                         }}
                     >
                         Explore Better Real Estate Opportunities Today

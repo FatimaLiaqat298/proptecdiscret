@@ -27,7 +27,7 @@ const Hero = () => {
                 transition={{ duration: 1.2 }}
                 className="hero-wrapper-full"
                 style={{
-                    backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2000&auto=format&fit=crop')`,
+                    backgroundImage: `linear-gradient(135deg, rgba(16,15,15,0.7) 0%, rgba(16,15,15,0.4) 100%), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2000&auto=format&fit=crop')`,
                 }}
             >
                 <div className="container hero-inner">
@@ -43,6 +43,7 @@ const Hero = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
+                            style={{ color: 'rgba(255,255,255,0.85)' }}
                         >
                             Discret Proptech helps you discover verified real estate opportunities with a modern, transparent, and guided buying experience.
                         </motion.p>
@@ -50,10 +51,16 @@ const Hero = () => {
 
                     {/* Search Module Moved Inside Container */}
                     <motion.div
-                        className="search-module"
+                        className="search-module frosted-glass"
                         initial={{ y: 50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.7 }}
+                        style={{
+                            background: 'rgba(255, 255, 255, 0.9)',
+                            backdropFilter: 'blur(20px)',
+                            WebkitBackdropFilter: 'blur(20px)',
+                            border: '1px solid rgba(255,255,255,0.4)'
+                        }}
                     >
                         <div className="search-field">
                             <label>Location</label>
