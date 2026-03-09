@@ -297,8 +297,24 @@ const LocationDiscovery = () => {
                                 initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                                 style={{ textAlign: 'center', marginTop: 16 }}
                             >
-                                <Link to="/search" className="explore-loc-btn">
-                                    Explore Locations
+                                <Link to="/search" style={{ textDecoration: 'none' }}>
+                                    <motion.span 
+                                        whileHover={{ 
+                                            scale: 1.05,
+                                            background: '#100F0F',
+                                            color: '#F9F9F9',
+                                            boxShadow: '0 8px 30px rgba(0,0,0,0.3)'
+                                        }}
+                                        whileTap={{ 
+                                            scale: 0.95,
+                                            background: '#100F0F',
+                                            color: '#F9F9F9'
+                                        }}
+                                        className="explore-loc-btn"
+                                        style={{ display: 'inline-block', cursor: 'pointer' }}
+                                    >
+                                        Explore Locations
+                                    </motion.span>
                                 </Link>
                             </motion.div>
                         )}

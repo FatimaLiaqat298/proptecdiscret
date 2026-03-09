@@ -1,18 +1,25 @@
 import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { ChevronLeft, Heart } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Heart, ArrowLeft } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useWishlist } from '../context/WishlistContext';
+import { motion } from 'framer-motion';
 
 const PropertyDetails = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const { toggleWishlist, isWishlisted } = useWishlist();
 
     // Scroll to top on load
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    // Back handler
+    const handleBack = () => {
+        navigate(-1);
+    };
 
     const property = {
         id: id,
@@ -39,10 +46,21 @@ const PropertyDetails = () => {
         <div className="property-details-page">
             <Navbar />
 
+            {/* Sticky/Fixed Back Button */}
+            <div className="sticky-back-container" style={{ zIndex: 9999999 }}>
+                <motion.button 
+                    className="sticky-back-btn"
+                    whileHover={{ scale: 1.1, backgroundColor: '#000', color: '#fff' }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={handleBack}
+                    title="Go Back"
+                >
+                    <ArrowLeft size={24} />
+                </motion.button>
+            </div>
+
             <section className="container" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
-                <Link to="/search" className="back-link">
-                    <ChevronLeft size={20} /> Back to Search
-                </Link>
+
 
                 <div className="details-layout">
                     {/* Left Side - Large Image + Gallery */}
@@ -64,12 +82,14 @@ const PropertyDetails = () => {
                                 <h1 className="h2" style={{ fontWeight: '700', marginBottom: '8px' }}>{property.title}</h1>
                                 <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>{property.location}</p>
                             </div>
-                            <button
+                            <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
                                 className={`wishlist-btn-circle ${active ? 'active' : ''}`}
                                 onClick={() => toggleWishlist(property)}
                             >
                                 <Heart size={22} className="heart-icon" fill={active ? "#ff4d4d" : "none"} color={active ? "#ff4d4d" : "currentColor"} />
-                            </button>
+                            </motion.button>
                         </div>
 
                         <div className="details-price">{property.price}</div>
@@ -104,8 +124,20 @@ const PropertyDetails = () => {
                         </div>
 
                         <div className="action-buttons">
-                            <button className="btn-schedule">Schedule a Tour</button>
-                            <button className="btn-contact-agent">Contact Agent</button>
+                            <motion.button 
+                                whileHover={{ scale: 1.02, backgroundColor: '#000', color: '#fff' }}
+                                whileTap={{ scale: 0.98, backgroundColor: '#000', color: '#fff' }}
+                                className="btn-schedule"
+                            >
+                                Schedule a Tour
+                            </motion.button>
+                            <motion.button 
+                                whileHover={{ scale: 1.02, backgroundColor: '#000', color: '#fff' }}
+                                whileTap={{ scale: 0.98, backgroundColor: '#000', color: '#fff' }}
+                                className="btn-contact-agent"
+                            >
+                                Contact Agent
+                            </motion.button>
                         </div>
                     </div>
                 </div>

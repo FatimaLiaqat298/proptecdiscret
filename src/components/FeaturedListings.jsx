@@ -164,21 +164,36 @@ const FeaturedListings = () => {
                 >
                     <Link
                         to="/search"
-                        style={{
-                            display: 'inline-block',
-                            padding: '18px 52px',
-                            borderRadius: '100px',
-                            background: '#F9F9F9',
-                            color: '#100F0F',
-                            fontWeight: 700,
-                            fontSize: '1rem',
-                            textDecoration: 'none',
-                            letterSpacing: '0.02em',
-                            transition: 'all 0.3s ease',
-                            boxShadow: '0 8px 30px rgba(255,255,255,0.15)'
-                        }}
+                        style={{ textDecoration: 'none' }}
                     >
-                        View All Listings
+                        <motion.span
+                            whileHover={{ 
+                                scale: 1.05,
+                                background: '#100F0F',
+                                color: '#F9F9F9',
+                                boxShadow: '0 8px 30px rgba(0,0,0,0.2)'
+                            }}
+                            whileTap={{ 
+                                scale: 0.95,
+                                background: '#100F0F',
+                                color: '#F9F9F9'
+                            }}
+                            style={{
+                                display: 'inline-block',
+                                padding: '18px 52px',
+                                borderRadius: '100px',
+                                background: '#F9F9F9',
+                                color: '#100F0F',
+                                fontWeight: 700,
+                                fontSize: '1rem',
+                                letterSpacing: '0.02em',
+                                transition: 'all 0.3s ease',
+                                boxShadow: '0 8px 30px rgba(255,255,255,0.15)',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            View All Listings
+                        </motion.span>
                     </Link>
                 </motion.div>
             </div >

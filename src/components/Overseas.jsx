@@ -73,18 +73,39 @@ const Overseas = () => {
                                     <CardFeature icon={ShieldCheck} title="Verified Only" desc="100% physically inspected properties." />
                                 </div>
 
-                                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                                    <Link to="/contact" style={{
-                                        display: 'inline-flex', alignItems: 'center', gap: 12,
-                                        padding: '20px 48px', borderRadius: 100,
-                                        background: '#F9F9F9', color: '#100F0F',
-                                        fontWeight: 700, fontSize: '1rem', textDecoration: 'none',
-                                        boxShadow: '0 10px 40px rgba(255,255,255,0.1)',
-                                        transition: 'all 0.3s ease',
-                                        width: 'fit-content'
-                                    }}>
-                                        Start Your Journey
-                                        <ArrowRight size={20} />
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.5 }}
+                                >
+                                    <Link to="/contact" style={{ textDecoration: 'none' }}>
+                                        <motion.span 
+                                            whileHover={{ 
+                                                scale: 1.02,
+                                                background: '#100F0F',
+                                                color: '#F9F9F9',
+                                                boxShadow: '0 10px 40px rgba(0,0,0,0.3)'
+                                            }} 
+                                            whileTap={{ 
+                                                scale: 0.98,
+                                                background: '#100F0F',
+                                                color: '#F9F9F9'
+                                            }}
+                                            style={{
+                                                display: 'inline-flex', alignItems: 'center', gap: 12,
+                                                padding: '20px 48px', borderRadius: 100,
+                                                background: '#F9F9F9', color: '#100F0F',
+                                                fontWeight: 700, fontSize: '1rem', textDecoration: 'none',
+                                                boxShadow: '0 10px 40px rgba(255,255,255,0.1)',
+                                                transition: 'all 0.3s ease',
+                                                width: 'fit-content',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            Start Your Journey
+                                            <ArrowRight size={20} />
+                                        </motion.span>
                                     </Link>
                                 </motion.div>
                             </motion.div>

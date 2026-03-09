@@ -26,9 +26,15 @@ const Footer = () => (
                         whileHover={{ 
                             scale: 1.02, 
                             y: -2,
+                            backgroundColor: '#000',
+                            color: '#fff',
                             boxShadow: '0 15px 35px rgba(255,255,255,0.15)'
                         }}
-                        whileTap={{ scale: 0.98 }}
+                        whileTap={{ 
+                            scale: 0.98,
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }}
                         className="btn footer-cta-btn"
                         style={{
                             marginTop: '16px',
@@ -38,7 +44,8 @@ const Footer = () => (
                             border: 'none',
                             padding: '14px 28px',
                             fontWeight: 700,
-                            fontSize: '1rem'
+                            fontSize: '1rem',
+                            transition: 'all 0.3s ease'
                         }}
                     >
                         Explore Better Real Estate Opportunities Today

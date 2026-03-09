@@ -40,8 +40,10 @@ const PropertyCard = ({ item, isShowcase, darkTheme }) => {
             }}
         >
             {/* Wishlist heart button */}
-            <button
+            <motion.button
                 className={`wishlist-btn-circle ${active ? 'active' : ''}`}
+                whileHover={{ scale: 1.15, backgroundColor: active ? 'rgba(182, 17, 19, 0.2)' : (darkTheme ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.05)') }}
+                whileTap={{ scale: 0.9 }}
                 style={{
                     position: 'absolute',
                     top: '16px',
@@ -56,6 +58,8 @@ const PropertyCard = ({ item, isShowcase, darkTheme }) => {
                     backgroundColor: darkTheme ? 'rgba(0,0,0,0.5)' : '#fff',
                     backdropFilter: 'blur(6px)',
                     border: 'none',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s ease'
                 }}
                 onClick={handleToggle}
             >
@@ -64,7 +68,7 @@ const PropertyCard = ({ item, isShowcase, darkTheme }) => {
                     fill={active ? (darkTheme ? "#fff" : "#100F0F") : "none"}
                     color={active ? (darkTheme ? "#fff" : "#100F0F") : (darkTheme ? "#fff" : "#100F0F")}
                 />
-            </button>
+            </motion.button>
 
             <Link
                 to={`/property/${propertyId}`}
@@ -158,9 +162,13 @@ const PropertyCard = ({ item, isShowcase, darkTheme }) => {
                                     scale: 1.05,
                                     background: darkTheme ? '#fff' : 'var(--primary-color)',
                                     color: darkTheme ? 'var(--primary-color)' : '#fff',
-                                    boxShadow: '0 8px 15px rgba(182, 17, 19, 0.15)'
+                                    boxShadow: darkTheme ? '0 8px 15px rgba(255, 255, 255, 0.15)' : '0 8px 15px rgba(0, 0, 0, 0.15)'
                                 }}
-                                whileTap={{ scale: 0.95 }}
+                                whileTap={{ 
+                                    scale: 0.95,
+                                    background: darkTheme ? '#fff' : 'var(--primary-color)',
+                                    color: darkTheme ? 'var(--primary-color)' : '#fff'
+                                }}
                                 style={{
                                     display: 'block',
                                     textAlign: 'center',

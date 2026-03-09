@@ -193,7 +193,8 @@
   transition: all 0.3s ease;
 }
 
-.nav-contact-btn:hover {
+.nav-contact-btn:hover,
+.nav-contact-btn:active {
   background-color: #000;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
@@ -319,7 +320,8 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-.search-btn:hover {
+.search-btn:hover,
+.search-btn:active {
   background: #000;
   transform: scale(1.1) rotate(5deg);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
@@ -337,7 +339,60 @@
   opacity: 0.8;
 }
 
-/* Search Results Page styles are already defined above and refined with !important */
+/* --- Sticky/Fixed Back Button --- */
+.sticky-back-container {
+  position: fixed;
+  top: 100px;
+  left: 30px;
+  z-index: 999999 !important;
+  pointer-events: none;
+}
+
+.sticky-back-btn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: #fff !important;
+  color: #000 !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 999999 !important;
+}
+
+.sticky-back-btn:hover,
+.sticky-back-btn:active {
+  background: #000 !important;
+  color: #fff !important;
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .sticky-back-container {
+    top: 100px !important;
+    bottom: auto !important;
+    left: 15px !important;
+    z-index: 9999999 !important;
+  }
+}
+
+.feature-pill:active {
+  background: #100F0F !important;
+  color: #fff !important;
+  transform: scale(0.95);
+}
+
+.back-link:active {
+  opacity: 0.7;
+  transform: translateX(-5px);
+}
 
 .back-link {
   display: flex;
@@ -458,7 +513,8 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-schedule:hover {
+.btn-schedule:hover,
+.btn-schedule:active {
   background: #000;
   transform: translateY(-3px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
@@ -477,7 +533,8 @@
   transition: all 0.3s ease;
 }
 
-.btn-contact-agent:hover {
+.btn-contact-agent:hover,
+.btn-contact-agent:active {
   background: var(--primary-color);
   color: #fff !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);

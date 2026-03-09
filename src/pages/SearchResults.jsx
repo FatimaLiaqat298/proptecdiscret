@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import { Search, ChevronLeft, ArrowUpDown } from 'lucide-react';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { Search, ArrowUpDown, ArrowLeft } from 'lucide-react';
 import PropertyCard from '../components/PropertyCard';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { motion } from 'framer-motion';
 
 // ─── Master dummy listings ───────────────────────────────────────────────────
 const ALL_LISTINGS = [
@@ -129,9 +130,9 @@ const ALL_LISTINGS = [
     }
 ];
 
-// ─── Component ────────────────────────────────────────────────────────────────
 const SearchResults = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const query = new URLSearchParams(location.search);
 
     const city = query.get('location') || '';
@@ -141,31 +142,25 @@ const SearchResults = () => {
     const [sortBy, setSortBy] = useState('default');
 
     const results = useMemo(() => {
+        // ... (results logic remains same)
         let filtered = [...ALL_LISTINGS];
-
-        // Filter by city
         if (city && city !== 'Anywhere') {
             const cityFiltered = filtered.filter(p =>
                 p.location.toLowerCase().includes(city.toLowerCase())
             );
             if (cityFiltered.length > 0) filtered = cityFiltered;
         }
-
-        // Filter by type
         if (type && type !== 'Any Property') {
             const typeFiltered = filtered.filter(p =>
                 p.type.toLowerCase().includes(type.toLowerCase())
             );
             if (typeFiltered.length > 0) filtered = typeFiltered;
         }
-
-        // Sort using numeric priceValue — no string parsing needed
         if (sortBy === 'price-asc') {
             filtered = [...filtered].sort((a, b) => a.priceValue - b.priceValue);
         } else if (sortBy === 'price-desc') {
             filtered = [...filtered].sort((a, b) => b.priceValue - a.priceValue);
         }
-
         return filtered;
     }, [city, type, sortBy]);
 
@@ -185,12 +180,23 @@ const SearchResults = () => {
     return (
         <div className="search-results-page">
             <Navbar />
+
+            {/* Sticky/Fixed Back Button */}
+            <div className="sticky-back-container" style={{ zIndex: 9999999 }}>
+                <motion.button 
+                    className="sticky-back-btn"
+                    whileHover={{ scale: 1.1, backgroundColor: '#000', color: '#fff' }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => navigate('/')}
+                    title="Back to Home"
+                >
+                    <ArrowLeft size={24} />
+                </motion.button>
+            </div>
+
             <section className="container" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
 
-                {/* Back link */}
-                <Link to="/" className="back-link">
-                    <ChevronLeft size={18} /> Back to Home
-                </Link>
+
 
                 {/* Page Header */}
                 <div className="search-header-box" style={{ marginTop: '16px', marginBottom: '10px' }}>
@@ -212,9 +218,18 @@ const SearchResults = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '24px 0 36px', flexWrap: 'wrap' }}>
                     <ArrowUpDown size={16} color="#64748b" />
                     <span style={{ fontWeight: 600, color: '#64748b', fontSize: '0.9rem', marginRight: '4px' }}>Sort by:</span>
-                    <button style={sortBtnStyle('default')} onClick={() => setSortBy('default')}>Default</button>
-                    <button style={sortBtnStyle('price-asc')} onClick={() => setSortBy('price-asc')}>Price: Low to High</button>
-                    <button style={sortBtnStyle('price-desc')} onClick={() => setSortBy('price-desc')}>Price: High to Low</button>
+                    
+                    {['default', 'price-asc', 'price-desc'].map(val => (
+                        <motion.button
+                            key={val}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            style={sortBtnStyle(val)}
+                            onClick={() => setSortBy(val)}
+                        >
+                            {val === 'default' ? 'Default' : val === 'price-asc' ? 'Price: Low to High' : 'Price: High to Low'}
+                        </motion.button>
+                    ))}
                 </div>
 
                 {/* Listings Grid */}
